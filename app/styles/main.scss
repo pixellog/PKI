@@ -1,87 +1,179 @@
-.browserupgrade {
-  margin: 0.2em 0;
-  background: #ccc;
-  color: #000;
-  padding: 0.2em 0;
-}
+$primary: #0091ff;
+$secondary: #c0c3c7;
+$purple: #7042e6;
+$info: $purple;
+$light: #f3f4f4;
+$link-color: #343a40;
+$border-color: #d9dbdd;
+$border-radius: 0;
+$btn-border-radius: .25rem;
+$font-size-base: 14;
+$body-color: #828790;
+$table-dark-bg: #828790;
+$table-border-color: #d9dbdd;
+$modal-content-border-radius: 0;
+$modal-content-border-width: 0;
+$modal-inner-padding: 2rem;
 
-/* Space out content a bit */
-body {
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
-}
+@import '../../node_modules/bootstrap/scss/bootstrap';
 
-/* Everything but the jumbotron gets side spacing for mobile first views */
-.header,
-.marketing,
-.footer {
-  padding-right: 1rem;
-  padding-left: 1rem;
-}
+// common
 
-/* Custom page header */
-.header {
-  padding-bottom: 1rem;
-  border-bottom: .05rem solid #e5e5e5;
-}
-
-/* Make the masthead heading the same height as the navigation */
-.header h3 {
-  margin-top: 0;
-  margin-bottom: 0;
-  line-height: 3rem;
-}
-
-/* Custom page footer */
-.footer {
-  padding-top: 1.5rem;
-  color: #777;
-  border-top: .05rem solid #e5e5e5;
-}
-
-/* Customize container */
-@media (min-width: 48em) {
-  .container {
-    max-width: 46rem;
-  }
-}
-.container-narrow > hr {
-  margin: 2rem 0;
-}
-
-/* Main marketing message and sign up button */
-.jumbotron {
+// tab
+.nav-link[data-toggle="tab"] {
   text-align: center;
-  border-bottom: .05rem solid #e5e5e5;
-}
-.jumbotron .btn {
-  padding: .75rem 1.5rem;
-  font-size: 1.5rem;
+  border: 1px solid transparent;
+
+  &:not(.active) {
+    border-color: $border-color;
+  }
+
+  &.disabled {
+    background-color: #c0c3c7;
+    color: #fff;
+  }
 }
 
-/* Supporting marketing content */
-.marketing {
-  margin: 3rem 0;
-}
-.marketing p + h4 {
-  margin-top: 1.5rem;
+.tab-pane {
+  margin-top: -1px;
 }
 
-/* Responsive: Portrait tablets and up */
-@media screen and (min-width: 48em) {
-  /* Remove the padding we set earlier */
-  .header,
-  .marketing,
-  .footer {
-    padding-right: 0;
-    padding-left: 0;
+.btn-group {
+  .btn {
+    border-radius: 0;
+    background-color: #f3f4f4;
+
+    &.active {
+      background-color: #fff;
+      border: 2px solid $primary;
+      color: $primary;
+    }
+
+    img {
+      display: none;
+    }
+
+    &:not(.active):not(.disabled) {
+      input + img {
+        display: inline-block;
+      }
+    }
+
+    &.active:not(.disabled) {
+      img[src*='check.png'] {
+        display: inline-block;
+      }
+    }
+
+    &.disabled {
+      img[src*='copy.png'] {
+        display: inline-block;
+      }
+
+      color: #333 !important;
+      border: 2px solid #c0c3c7 !important;
+    }
   }
-  /* Space out the masthead */
-  .header {
-    margin-bottom: 2rem;
+
+  .nav-link {
+    padding: 0;
+    color: #fff;
+
+    &.active {
+      text-decoration: underline;
+    }
   }
-  /* Remove the bottom border on the jumbotron for visual effect */
-  .jumbotron {
-    border-bottom: 0;
+}
+
+.btn-secondary {
+  color: #fff;
+}
+
+// modal
+.modal {
+
+  .modal-header {
+    justify-content: center;
+  }
+
+  .modal-footer {
+    justify-content: center;
+    padding-top: 0;
+    padding-bottom: 36px;
+
+    .btn {
+      min-width: 140px;
+      padding: $btn-padding-x $btn-padding-y;
+      font-weight: bold;
+    }
+  }
+
+  &:not(.modal-alert) {
+    .modal-header {
+      background-color: $purple;
+      color: #fff;
+    }
+  }
+
+  &.modal-alert {
+    .modal-header {
+      border-bottom: 1px solid $border-color;
+
+      .modal-title {
+        margin-left: auto;
+        color: $purple;
+      }
+
+      .close {
+        font-weight: 100;
+        font-size: 2rem;
+        line-height: 1;
+        padding: .5rem 1rem 0;
+      }
+    }
+  }
+}
+
+// table
+.table {
+  th {
+    font-weight: 400;
+  }
+
+  tbody tr {
+    &.bg-primary {
+      background-color: #e9f6fe !important;
+    }
+  }
+
+  &.table-hover {
+    tbody tr {
+      cursor: pointer;
+    }
+  }
+}
+
+// popover
+.bs-popover-bottom > .arrow::after,
+.bs-popover-auto[x-placement^="bottom"] > .arrow::after {
+  border-bottom-color: $primary;
+}
+.bs-popover-bottom > .arrow::before,
+.bs-popover-auto[x-placement^="bottom"] > .arrow::before {
+  border-bottom-color: rgba(0, 0, 0, 0);
+}
+
+.popover {
+  border: 0;
+  top: 77px !important;
+  left: 24px !important;
+
+  .popover-body {
+    background-color: $primary;
+    min-width: 216px;
+
+    a {
+      color: #fff;
+    }
   }
 }

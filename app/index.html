@@ -1,70 +1,226 @@
 <!doctype html>
 <html lang="">
-  <head>
-    <meta charset="utf-8">
-    <meta name="description" content="">
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>PKI</title>
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    <!-- Place favicon.ico in the root directory -->
-    <!-- build:css styles/vendor.css -->
-    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
-    <!-- endbuild -->
-    <!-- build:css styles/main.css -->
-    <link rel="stylesheet" href="styles/main.css">
-    <!-- endbuild -->
-  </head>
-  <body>
-    <!--[if IE]>
-      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
-    <div class="container">
-      <div class="header">
-        <ul class="nav nav-pills float-right">
-          <li class="nav-item">
-            <a href="#" class="nav-link active">Home</a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">About</a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">Contact</a>
-          </li>
-        </ul>
-        <h3 class="text-muted">PKI</h3>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>PKI</title>
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <!-- Place favicon.ico in the root directory -->
+  <!-- build:css styles/vendor.css -->
+  <!--  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" type="text/css"/>-->
+  <!-- endbuild -->
+  <!-- build:css styles/main.css -->
+  <link rel="stylesheet" href="styles/main.css">
+  <!-- endbuild -->
+</head>
+<body>
+
+<div class="container">
+
+  <div class="text-center">
+    <button type="button" class="btn btn-lg btn-info px-5 my-5" onclick="modalCertCopy()">공인인증서 복사하기</button>
+  </div>
+
+  <img src="/images/pki-pc-01.png" srcset="/images/pki-pc-01@2x.png 2x, /images/pki-pc-01@3x.png 3x">
+
+</div>
+
+<div class="modal fade" id="cert-copy-modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">공인인증서 복사하기</h5>
       </div>
+      <div class="modal-body">
 
-      <div class="jumbotron">
-        <h1 class="display-3">'Allo, 'Allo!!!!!</h1>
-        <p class="lead">Always a pleasure scaffolding your apps.</p>
-        <p><a class="btn btn-lg btn-success" href="#">Splendid!</a></p>
-      </div>
+        <div id="cert-export-select">
+          <h6>1. 기능 선택</h6>
 
-      <div class="row marketing">
-        <div class="col-lg-6">
-          <h4>HTML5 Boilerplate</h4>
-          <p>HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.</p>
+          <ul class="nav nav-pills">
+            <li class="nav-item w-50">
+              <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">인증서 내보내기</a>
+            </li>
+            <li class="nav-item w-50">
+              <a class="nav-link disabled" data-toggle="tab" href="#tabs-2" role="tab">인증서 가져오기</a>
+            </li>
+          </ul>
 
-          <h4>Sass</h4>
-          <p>Sass is the most mature, stable, and powerful professional grade CSS extension language in the world.</p>
+          <div class="tab-content">
+            <div class="tab-pane active" id="tabs-1" role="tabpanel">
+              <div class="border p-3">
+                스마트폰에 복사할 인증서를 선택하고, 비밀번호를 입력하세요. <br>
+                (인증서가 등록된 금융사의 정보를 불러올 수 있습니다.)
+              </div>
 
-          <h4>Bootstrap</h4>
-          <p>Sleek, intuitive, and powerful mobile first front-end framework for faster and easier web development.</p>
+              <h6 class="mt-4">2. 저장매체</h6>
 
+              <div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
+                <label class="btn w-50">
+                  <input type="radio" name="options" id="option1" checked>
+                  <img src="/images/icon-hardware.png" srcset="images/icon-hardware@2x.png 2x, images/icon-hardware@3x.png 3x">
+                  <img src="/images/icon-hardware-check.png" srcset="images/icon-hardware-check@2x.png 2x, images/icon-hardware-check@3x.png 3x">
+                  <img src="/images/icon-hardware-check-copy.png" srcset="images/icon-hardware-check-copy@2x.png 2x, images/icon-hardware-check-copy@3x.png 3x">
+                  <span class="d-block">하드디스크</span>
+                </label>
+                <label class="btn w-50">
+                  <input type="radio" name="options" id="option2" disabled checked>
+                  <img src="/images/icon-usb.png" srcset="images/icon-usb@2x.png 2x, images/icon-usb@3x.png 3x">
+                  <img src="/images/icon-usb-check.png" srcset="images/icon-usb-check@2x.png 2x, images/icon-usb-check@3x.png 3x">
+                  <img src="/images/icon-usb-check-copy.png" srcset="images/icon-usb-check-copy@2x.png 2x, images/icon-usb-check-copy@3x.png 3x">
+                  <span class="d-block">이동식디스크</span>
+                </label>
+              </div>
+
+              <h6 class="mt-4" onclick="selectCertDisabled();">3. 인증서 선택</h6>
+              <table class="table table-bordered table-hover text-center">
+                <thead class="thead-dark">
+                <tr>
+                  <th>구분</th>
+                  <th>사용자</th>
+                  <th>만료일</th>
+                  <th>발급기관</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td class="text-left">
+                    <div class="text-truncate" style="width: 98px;">
+                      <img class="mr-1" src="/images/icon-cert.png" srcset="images/icon-cert@2x.png 2x, images/icon-cert@3x.png 3x">
+                      은행/개인
+                    </div>
+                  </td>
+                  <td>김아연</td>
+                  <td>2020년07월10일</td>
+                  <td>
+                    <div class="text-truncate" style="width: 80px;">SignKoreaaaaaaa</div>
+                  </td>
+                </tr>
+                <tr class="bg-primary">
+                  <td class="text-left">
+                    <div class="text-truncate" style="width: 98px;">
+                      <img class="mr-1" src="/images/icon-cert-info.png" srcset="images/icon-cert-info@2x.png 2x, images/icon-cert-info@3x.png 3x">
+                      은행/신용카드/보험(개인)
+                    </div>
+                  </td>
+                  <td>김아연</td>
+                  <td>2020년07월10일</td>
+                  <td>
+                    <div class="text-truncate" style="width: 80px;">SignKoreaaaaaaa</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-left">
+                    <div class="text-truncate" style="width: 98px;">
+                      <img class="mr-1" src="/images/icon-cert-end.png" srcset="images/icon-cert-end@2x.png 2x, images/icon-cert-end@3x.png 3x">
+                      증권/보험용
+                    </div>
+                  </td>
+                  <td>김아연</td>
+                  <td>2020년07월10일</td>
+                  <td>
+                    <div class="text-truncate" style="width: 80px;">SignKoreaaaaaaa</div>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+              <form>
+
+                <div id="input-cert-password">
+                  <h6>인증서 비밀번호</h6>
+                  <input type="password" class="form-control" maxlength="" id="">
+                </div>
+
+                <div id="input-cert-number" style="display:none;">
+                  <h6>인증번호 입력</h6>
+                  <div class="form-group row no-gutters align-items-center">
+                    <input type="password" placeholder="4자리" class="form-control col px-2" maxlength="4"><span class="px-1">-</span>
+                    <input type="password" placeholder="4자리" class="form-control col px-2" maxlength="4"><span class="px-1">-</span>
+                    <input type="password" placeholder="4자리" class="form-control col px-2" maxlength="4">
+                  </div>
+                </div>
+
+              </form>
+            </div>
+            <!-- 탭2 : 인증서 가져오기 -->
+            <div class="tab-pane" id="tabs-2" role="tabpanel">
+              <div class="border p-3">
+                ※ 인증서 요청을 했습니다. 아래 인증번호를 인증서를 보내시려는 <br>
+                기기에 입력하여 주시고 인증서 선택 후 확인을 눌러주세요.
+              </div>
+
+              <h6 class="mt-4">2. 인증번호 생성</h6>
+              <div class="form-group row no-gutters align-items-center">
+                <input type="text" value="1234" maxlength="4" class="form-control col text-primary font-weight-bold text-center"><span class="px-1">-</span>
+                <input type="text" value="1234" maxlength="4" class="form-control col text-primary font-weight-bold text-center"><span class="px-1">-</span>
+                <input type="text" value="1234" maxlength="4" class="form-control col text-primary font-weight-bold text-center">
+              </div>
+
+            </div>
+          </div>
         </div>
-      </div>
 
-      <div class="footer">
-        <p>♥ from the Yeoman team</p>
+        <!-- todo : 인증서 저장경로 위치 -->
+        <div id="cert-save-path" style="margin-bottom: 200px; display: none">
+          <p class="text-black">인증서 저장 경로를 설정하여 주시기 바랍니다.</p>
+          <div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
+            <label class="btn rounded-0 w-50">
+              <input type="radio" name="options" id="option1-1"
+                     data-container="body" data-toggle="popover" data-html="true" data-placement="bottom"
+                     data-content='<a href="#none">로컬 디스크(C:)</a><br><a href="#none">로컬 디스크(D:)</a>'>
+              <img src="/images/icon-hardware.png" srcset="images/icon-hardware@2x.png 2x, images/icon-hardware@3x.png 3x">
+              <img src="/images/icon-hardware-check.png" srcset="images/icon-hardware-check@2x.png 2x, images/icon-hardware-check@3x.png 3x">
+              <img src="/images/icon-hardware-check-copy.png" srcset="images/icon-hardware-check-copy@2x.png 2x, images/icon-hardware-check-copy@3x.png 3x">
+              <span class="d-block">하드디스크</span>
+            </label>
+
+            <label class="btn rounded-0 w-50">
+              <input type="radio" name="options" id="option2-1"
+                     data-container="body" data-toggle="popover" data-html="true" data-placement="bottom"
+                     data-content='<a href="#none">CD-ROM(E:)</a><br><a href="#none">USB 드라이브(G:)</a>'>
+              <img src="/images/icon-usb.png" srcset="images/icon-usb@2x.png 2x, images/icon-usb@3x.png 3x">
+              <img src="/images/icon-usb-check.png" srcset="images/icon-usb-check@2x.png 2x, images/icon-usb-check@3x.png 3x">
+              <img src="/images/icon-usb-check-copy.png" srcset="images/icon-usb-check-copy@2x.png 2x, images/icon-usb-check-copy@3x.png 3x">
+              <span class="d-block">이동식디스크</span>
+            </label>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소(종료)</button>
+        <button type="button" class="btn btn-info" onclick="certImportOk()">확인</button>
       </div>
     </div>
-    <!-- build:js scripts/vendor.js -->
-    <script type="text/javascript" src="/node_modules/jquery/dist/jquery.min.js"></script>
-    <script type="text/javascript" src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-    <!-- endbuild -->
-    <!-- build:js scripts/main.js -->
-    <script src="scripts/main.js"></script>
-    <!-- endbuild -->
-  </body>
+  </div>
+</div>
+
+<div class="modal modal-alert fade" id="alert-modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">알림</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="text-center">인증서 복사가 완료되었습니다.</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" data-dismiss="modal">확인</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- build:js scripts/vendor.js -->
+<script type="text/javascript" src="/node_modules/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<!-- endbuild -->
+<!-- build:js scripts/main.js -->
+<script src="scripts/main.js"></script>
+<!-- endbuild -->
+</body>
 </html>
