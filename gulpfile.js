@@ -66,9 +66,9 @@ function lintTest() {
 function html() {
   return src('app/*.html')
     .pipe($.useref({searchPath: ['.tmp', 'app', '.']}))
-    .pipe($.if(/\.js$/, $.uglify({compress: {drop_console: true}})))
+    //.pipe($.if(/\.js$/, $.uglify({compress: {drop_console: true}})))
     .pipe($.if(/\.css$/, $.postcss([cssnano({safe: true, autoprefixer: false})])))
-    .pipe($.if(/\.html$/, $.htmlmin({
+    /*.pipe($.if(/\.html$/, $.htmlmin({
       collapseWhitespace: true,
       minifyCSS: true,
       minifyJS: {compress: {drop_console: true}},
@@ -77,7 +77,7 @@ function html() {
       removeEmptyAttributes: true,
       removeScriptTypeAttributes: true,
       removeStyleLinkTypeAttributes: true
-    })))
+    })))*/
     .pipe(dest('dist'));
 }
 
