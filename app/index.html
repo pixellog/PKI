@@ -1,9 +1,8 @@
 <!doctype html>
-<html lang="">
+<html lang="ko">
 <head>
   <meta charset="utf-8">
-  <meta name="description" content="">
-
+  <meta name="description" content="이스파이더 공인인증서 복사하기">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>PKI</title>
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -40,10 +39,10 @@
 
           <ul class="nav nav-pills">
             <li class="nav-item w-50">
-              <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">인증서 내보내기</a>
+              <a class="nav-link active" id="tab-export" data-toggle="tab" href="#tabs-1" role="tab">인증서 내보내기</a>
             </li>
             <li class="nav-item w-50">
-              <a class="nav-link disabled" data-toggle="tab" href="#tabs-2" role="tab">인증서 가져오기</a>
+              <a class="nav-link" id="tab-import" data-toggle="tab" href="#tabs-2" role="tab">인증서 가져오기</a>
             </li>
           </ul>
 
@@ -57,15 +56,18 @@
               <h6 class="mt-4">2. 저장매체</h6>
 
               <div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
-                <label class="btn w-50">
-                  <input type="radio" name="options" id="option1" checked>
+                <label class="btn rounded-0 w-50">
+                  <input type="radio" name="options" id="option1" data-toggle="popover" checked>
                   <img src="/images/icon-hardware.png" srcset="images/icon-hardware@2x.png 2x, images/icon-hardware@3x.png 3x">
                   <img src="/images/icon-hardware-check.png" srcset="images/icon-hardware-check@2x.png 2x, images/icon-hardware-check@3x.png 3x">
                   <img src="/images/icon-hardware-check-copy.png" srcset="images/icon-hardware-check-copy@2x.png 2x, images/icon-hardware-check-copy@3x.png 3x">
                   <span class="d-block">하드디스크</span>
                 </label>
-                <label class="btn w-50">
-                  <input type="radio" name="options" id="option2" disabled checked>
+
+                <label class="btn rounded-0 w-50">
+                  <input type="radio" name="options" id="option2" data-toggle="popover"
+                         data-container="body" data-html="true" data-placement="bottom"
+                         data-content='<a href="#none">CD-ROM(E:)</a><br><a href="#none">USB 드라이브(G:)</a>'>
                   <img src="/images/icon-usb.png" srcset="images/icon-usb@2x.png 2x, images/icon-usb@3x.png 3x">
                   <img src="/images/icon-usb-check.png" srcset="images/icon-usb-check@2x.png 2x, images/icon-usb-check@3x.png 3x">
                   <img src="/images/icon-usb-check-copy.png" srcset="images/icon-usb-check-copy@2x.png 2x, images/icon-usb-check-copy@3x.png 3x">
@@ -97,7 +99,7 @@
                     <div class="text-truncate" style="width: 80px;">SignKoreaaaaaaa</div>
                   </td>
                 </tr>
-                <tr class="bg-primary">
+                <tr>
                   <td class="text-left">
                     <div class="text-truncate" style="width: 98px;">
                       <img class="mr-1" src="/images/icon-cert-info.png" srcset="images/icon-cert-info@2x.png 2x, images/icon-cert-info@3x.png 3x">
@@ -129,7 +131,7 @@
 
                 <div id="input-cert-password">
                   <h6>인증서 비밀번호</h6>
-                  <input type="password" class="form-control" maxlength="" id="">
+                  <input type="password" class="form-control" maxlength="" id="cert-pw">
                 </div>
 
                 <div id="input-cert-number" style="display:none;">
@@ -166,9 +168,7 @@
           <p class="text-black">인증서 저장 경로를 설정하여 주시기 바랍니다.</p>
           <div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
             <label class="btn rounded-0 w-50">
-              <input type="radio" name="options" id="option1-1"
-                     data-container="body" data-toggle="popover" data-html="true" data-placement="bottom"
-                     data-content='<a href="#none">로컬 디스크(C:)</a><br><a href="#none">로컬 디스크(D:)</a>'>
+              <input type="radio" name="options" id="option1-1" checked>
               <img src="/images/icon-hardware.png" srcset="images/icon-hardware@2x.png 2x, images/icon-hardware@3x.png 3x">
               <img src="/images/icon-hardware-check.png" srcset="images/icon-hardware-check@2x.png 2x, images/icon-hardware-check@3x.png 3x">
               <img src="/images/icon-hardware-check-copy.png" srcset="images/icon-hardware-check-copy@2x.png 2x, images/icon-hardware-check-copy@3x.png 3x">
@@ -190,7 +190,9 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">취소(종료)</button>
-        <button type="button" class="btn btn-info" onclick="certImportOk()">확인</button>
+        <button type="button" class="btn btn-info" onclick="selectCertDisabled()">확인 : 인증서 내보내기 > 인증성 비밀번호 입력 후</button>
+        <button type="button" class="btn btn-info" data-dismiss="modal" onclick="modalAlert()">확인 : 알림 팝업</button>
+        <button type="button" class="btn btn-info" onclick="certImportOk()">확인 : 인증서 가져오기 인증번호 생성 입력 후 </button>
       </div>
     </div>
   </div>

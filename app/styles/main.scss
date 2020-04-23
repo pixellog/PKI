@@ -53,7 +53,7 @@ $modal-inner-padding: 2rem;
       display: none;
     }
 
-    &:not(.active):not(.disabled) {
+    &:not(.active) {
       input + img {
         display: inline-block;
       }
@@ -63,15 +63,18 @@ $modal-inner-padding: 2rem;
       img[src*='check.png'] {
         display: inline-block;
       }
+      border: 2px solid $primary !important;
     }
 
-    &.disabled {
+    &.active.disabled {
       img[src*='copy.png'] {
         display: inline-block;
       }
-
-      color: #333 !important;
       border: 2px solid #c0c3c7 !important;
+    }
+
+    &.disabled {
+      color: #333 !important;
     }
   }
 
@@ -174,6 +177,9 @@ $modal-inner-padding: 2rem;
 
     a {
       color: #fff;
+      &.active {
+        text-decoration: underline;
+      }
     }
   }
 }
