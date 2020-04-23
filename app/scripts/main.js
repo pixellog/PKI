@@ -1,5 +1,5 @@
 // 공인인증서 복사하기 팝업
-modalCertCopy();
+// modalCertCopy();
 
 // 공인인증서 복사하기 팝업
 function modalCertCopy() {
